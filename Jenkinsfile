@@ -5,9 +5,9 @@ pipeline {
         nodejs "Node"  // Увери се, че името съответства на настройката в Jenkins за Node.js
     }
 
-    environment {
-        CHROME_BIN = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'  // Увери се, че пътят до Chrome е правилен за Windows
-    }
+    // environment {
+    //     CHROME_BIN = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'  // Увери се, че пътят до Chrome е правилен за Windows
+    // }
 
     stages {
         stage('Checkout') {
