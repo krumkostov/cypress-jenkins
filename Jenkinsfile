@@ -1,37 +1,36 @@
 pipeline {
     agent any
 
-    tools { 
-        nodejs "Node"  // Увери се, че името съответства на настройката в Jenkins за Node.js
-    }
-
-    // environment {
-    //     CHROME_BIN = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'  // Увери се, че пътят до Chrome е правилен за Windows
-    // }
-
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/krumkostov/cypress-jenkins.git'  // Твоят GitHub репозитори
+                git 'https://github.com/krumkostov/cypress-jenkins.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'  // Изпълняване на командата npm install за инсталиране на зависимостите на Windows
+                script {
+                    // Инсталиране на npm зависимости
+                    bat 'npm install'
+                }
             }
         }
 
-        stage('Run Contact Page Test') {
+        stage('Run Cypress Tests') {
             steps {
-                bat 'npx cypress run --spec "cypress/e2e/contactpage.spec.cy.js"'  // Изпълнение на конкретния Cypress тест
+                script {
+                    // Стартиране на всички тестови файлове в папката cypress/e2e/*.spec.cy.js
+                    bat 'npx cypress run --spec "cypress/e2e/**/*.spec.cy.js"'
+                }
             }
         }
+    }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'  // Placeholder за деплой
-            }
+    post {
+        always {
+            // Стъпки за почистване или архивиране на резултати след тестовете
+            cleanWs()
         }
     }
 }
