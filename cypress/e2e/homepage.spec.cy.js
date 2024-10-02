@@ -2,7 +2,7 @@ import HomePage from '../support/homePage';
 import Header from '../support/header';
 
 
-describe.skip('Home Page Tests', () => {
+describe('Home Page Tests', () => {
    const homePage = new HomePage();
    const header = new Header();
 
