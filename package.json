@@ -2,9 +2,12 @@
   "name": "cypress",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+  "test": "npx cypress run --headless",
+  "cypress:open": "npx cypress open",
+  "cypress:runDefault": "npx cypress run --spec cypress/e2e/*.spec.cy.js",
+  "cypress:chrome": "npx cypress run --browser chrome --spec cypress/e2e/*.spec.cy.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
