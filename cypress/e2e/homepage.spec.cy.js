@@ -5,6 +5,25 @@ describe('Home Page Tests', () => {
   const homePage = new HomePage();
   const header = new Header();
 
+  beforeEach(() => {
+    cy.viewport(1920, 1080);
+    cy.visit('https://strypes.eu');
+  });
+
+  it('should have the correct title', () => {
+    homePage
+      .getTitle()
+      .should('eq', 'ICT Strypes | End-to-end software solutions');
+  });
+
+  it('should have logo banner', () => {
+    header.getLogoBanner().should('be.visible');
+  });
+
+  it('should check main navigation menus', () => {
+    cy.contains('Accept All').should('be.visible').click();
+
+    header.getNavigationMenu().should('be.visible');
 
     /* verify that all navigation options are there and visible -> "headerNavigationOptions":  ["About", "Services", "Customers", "Nearsurance", "Resources", "Careers"] */
     cy.fixture('header.common').then((headerCommon) => {
